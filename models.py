@@ -6,23 +6,28 @@ class State():
     to_move = None
     moves = None
     utility = None
+    init_to_move = None
 
-    def __init__(self, game):
+    def __init__(self, game, to_move='o'):
         self.board = {}
         for i in range(game.height):
             for j in range(game.width):
                 self.board[(i, j)] = None
-
-        self.to_move = 'x'
+        self.init_to_move = to_move
+        self.to_move = self.init_to_move
         self.moves = self.board.keys()
         self.utility = 0
+
+    def restart(self):
+        self.to_move = self.init_to_move
+        for k in self.board.values():
+            self.board[k] = None
 
 
 class Game():
     count = 0
     width = 5
     height = 4
-    next = 'x'
     players = ('o', 'x')
     robot = None
     last = None
@@ -34,7 +39,7 @@ class Game():
     def __init__(self, width=5, height=4):
         self.width = width
         self.height = height
-        self.robot = 'o'
+        self.robot = 'x'
 
     def actions(self, state):
         return state.moves
@@ -60,11 +65,15 @@ class Game():
             return True
         return False
 
-    # def unpin(self):
-    #     if not state[self.last[0]][self.last[1]] == self.next:
-    #         state[self.last[0]][self.last[1]] = None
-    #     self.count -= 1
-    #     self.next = 'x' if self.next == 'o' else 'o'
+    def terminal_result(self, state):
+        if self.con('x', state) >= 4 or self.con('o', state) < 4:
+            return 'X!'
+        elif self.con('o', state) >= 4 or self.con('x', state) < 4:
+            return 'O!'
+        elif not self.actions(state):
+            return 'Draw!'
+        else:
+            return 'Not over'
 
     def subcon(self, ox, block, direction, state):
         '''
