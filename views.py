@@ -187,7 +187,7 @@ class Application(Frame):
 
 
 def main():
-    app = Application(width=7, height=6)
+    app = Application(width=5, height=4)
     app.mainloop()
 
 if __name__ == '__main__':
