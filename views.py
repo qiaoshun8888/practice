@@ -1,4 +1,6 @@
-import tkMessageBox
+"""
+UI, using Tkinter
+"""
 import threading
 from Tkinter import *
 from models import Game, State
@@ -14,23 +16,20 @@ class Robot(threading.Thread):
         self.player_move = player_move
 
     def run(self):
-        if not self.app.game.terminal_test(self.app.state):
-            # self.app.disable_all()
-            self.app.robot_thinking_time_label.config(text='I am thinking')
-            import datetime
-            _s = datetime.datetime.now()
-            p = alphabeta_search(
-                self.app.state,
-                self.app.game,
-                self.player_move,
-                self.app.robot_level,
-                self.app.progress)
-            self.app.lock = False
-            # print p
-            # self.app.enable_all()
-            self.app.block[p].click()
-            self.app.robot_thinking_time_label.config(text='Used: %ds' % (
-                (datetime.datetime.now() - _s).seconds))
+        self.app.robot_thinking_time_label.config(text='I am thinking')
+        import datetime
+        _s = datetime.datetime.now()
+        self.app.lock = True
+        p = alphabeta_search(
+            self.app.state,
+            self.app.game,
+            self.player_move,
+            self.app.robot_level,
+            self.app.progress)
+        self.app.lock = False
+        self.app.block[p].click()
+        self.app.robot_thinking_time_label.config(text='Used: %ds' % (
+            (datetime.datetime.now() - _s).seconds))
 
 
 class Block():
@@ -42,16 +41,16 @@ class Block():
                 self.app.state,
                 self.position)
         else:
-            tkMessageBox.showinfo("wrong move", "cannot click here")
+            self.app.result_label.config(text="Cannot move!")
         if self.app.game.terminal_test(self.app.state):
-            tkMessageBox.showinfo(
-                "Finished", self.app.game.terminal_result(self.app.state))
+            self.app.lock = True
+            self.app.result_label.config(
+                text='Result: ' + self.app.game.terminal_result(self.app.state))
 
     def vs_robot_click(self, event=None):
         if not self.app.lock:
-            self.app.lock = True
             self.click(event)
-            if self.app.state.to_move == self.app.game.robot:
+            if self.app.state.to_move == self.app.game.robot and not self.app.lock:
                 Robot(self.app, self.position).start()
 
     def draw(self, ox):
@@ -100,12 +99,15 @@ class Application(Frame):
             self.block[k] = Block(self, k)
         self.pick_weak_robot()
         self.player_first()
+        self.result_label.config(text='Playing')
         self.lock = False
 
     def restart(self):
-        self.state.restart()
+        self.state.start_new()
         for k in self.block.values():
             k.canvas.delete("all")
+        self.result_label.config(text='Playing')
+        self.lock = False
 
         if self.state.to_move == 'x':
             Robot(self, None).start()
@@ -178,10 +180,14 @@ class Application(Frame):
         self.robot_thinking_time_label.pack()
         self.robot_thinking_time_label.place(
             x=self.width * 100 - 150, y=self.height * 100 + 25)
+        self.result_label = Label(self.master, text="Result")
+        self.result_label.pack()
+        self.result_label.place(
+            x=self.width * 100 - 150, y=self.height * 100 + 55)
 
 
 def main():
-    app = Application(width=5, height=4)
+    app = Application(width=7, height=6)
     app.mainloop()
 
 if __name__ == '__main__':

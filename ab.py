@@ -1,3 +1,6 @@
+"""
+Alpha Beta Search Algorithm
+"""
 import random
 from datetime import datetime
 
@@ -9,7 +12,7 @@ def alphabeta_search(state, game, move, robot_level=1, progress=None):
     def max_value(state, alpha, beta, depth):
         if cutoff_test(state, depth):
             return eval_fn(state)
-        v = -1
+        v = -3
         for a in game.actions(state):
             v = max(v, min_value(game.result(state, a),
                                  alpha, beta, depth + 1))
@@ -21,7 +24,7 @@ def alphabeta_search(state, game, move, robot_level=1, progress=None):
     def min_value(state, alpha, beta, depth):
         if cutoff_test(state, depth):
             return eval_fn(state)
-        v = 1
+        v = 3
         for a in game.actions(state):
             v = min(v, max_value(game.result(state, a),
                                  alpha, beta, depth + 1))
@@ -32,7 +35,8 @@ def alphabeta_search(state, game, move, robot_level=1, progress=None):
 
     def cutoff_test(state, depth):
         cut = game.terminal_test(state) or depth > d
-        time_cut = (datetime.now() - _absearch_starttime).seconds > 10
+        time_cut = (
+            datetime.now() - _absearch_starttime).seconds > 10
         return cut or time_cut
 
     def eval_fn(state):
@@ -40,6 +44,7 @@ def alphabeta_search(state, game, move, robot_level=1, progress=None):
         return -u if player == state.to_move else u
 
     def best(seq):
+        random.shuffle(seq)
         best = seq[0]
         best_score = min_value(game.result(state, best), -3, 3, 0)
         if progress:
@@ -52,21 +57,18 @@ def alphabeta_search(state, game, move, robot_level=1, progress=None):
             if x_score > best_score:
                 best, best_score = x, x_score
         progress['value'] = 0
+        # print best, best_score
         return best
 
     def random_action():
         actions = game.actions(state)
         action = random.choice(actions)
-        print[0, game.width - 1], [0, game.height - 1]
         while action[1] in [0, game.width - 1] or action[0] in [0, game.height - 1]:
             action = random.choice(actions)
         return action
 
-    # if len(game.actions(state)) >= 18:
-    #     result = random_action()
-    # else:
     if not move:
         return random_action()
     else:
-        d = (20 / len(game.actions(state))) * robot_level
+        d = robot_level
         return best(game.actions(state))
