@@ -11,23 +11,17 @@ python aiproject
 
 DESCRIPTION
 -----------
-Models.py contains Class 'Game', 'State'
+Models.py contains Class 'Game', 'State'. 
+Views.py is controller of UI, using TKinter.
+ab.py is the alpha beta algorithm.
 
-Views.py is controller of UI, using TKinter
-
-ab.py is the alpha beta algorithm
-
-
-The cut off function is defined in ab.py
-
+The cut off function is defined in ab.py.
 It does:
   1. Test the game whether it is terminal
   2. Test the time is up
 
-The evaluation function is defined in Game Class
-
-And the utility of State instance get from the evalutaion function
-
+The evaluation function is defined in Game Class.
+And the utility of State instance get from the evalutaion function.
 It does:
  * If there are 4 x in a row: return inf
  * else if there are 4 o in a row: return -inf
