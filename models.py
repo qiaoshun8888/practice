@@ -40,6 +40,10 @@ class State():
         self.utility = 0
 
     def display(self):
+        """
+        Display the state as a matrix
+        Only used in debug mode
+        """
         for i in range(self.game.height):
             print '\n'
             for j in range(self.game.width):
@@ -60,6 +64,7 @@ class Game():
         self.width = width
         self.height = height
         self.robot = 'x'
+        self.set_ox_list()
 
     def actions(self, state):
         """
@@ -101,7 +106,7 @@ class Game():
         """
         if not self.actions(state):
             return True
-        if self.win('x', state) or self.win('o', state):
+        if self.win(state):
             return True
         return False
 
@@ -110,148 +115,116 @@ class Game():
         Given state, return the terminal state description
         Should only be called when terminal_test is True
         """
-        if self.win('x', state) and not self.win('o', state):
+        if self.win(state, 'x') and not self.win(state, 'o'):
             return 'X!'
-        elif not self.win('x', state) and self.win('o', state):
+        elif self.win(state, 'o') and not self.win(state, 'x'):
             return 'O!'
         elif not self.actions(state):
             return 'Draw!'
         else:
             return 'Not over'
 
-    def subcon(self, ox, block, direction, state):
-        '''
-        Given player symbol, position, direction, state
-        Return how many
-        '''
-        c = 1
-        breaks = 0
-        for d in direction:
-            (tmp_i, tmp_j) = block
-            tmp_i += d[0]
-            tmp_j += d[1]
-            while True:
-                if tmp_i > self.height - 1 or tmp_j > self.width - 1 or tmp_i < 0 or tmp_j < 0:
-                    breaks += 1
-                    break
-                if not state.board[(tmp_i, tmp_j)] == ox:
-                    if state.board[(tmp_i, tmp_j)]:
-                        breaks += 1
-                    break
+    def set_ox_list(self):
+        """
+        Set a list of all row, column, diag blocks
+        For the evaluation function to check
+        """
+        hdic = {}
+        vdic = {}
+        ldic = {}
+        rdic = {}
+        for i in range(self.height):
+            for j in range(self.width):
+                if i in hdic:
+                    hdic[i].append((i, j))
                 else:
+                    hdic[i] = [(i, j)]
+
+                if j in vdic:
+                    vdic[j].append((i, j))
+                else:
+                    vdic[j] = [(i, j)]
+
+                if i - j in ldic:
+                    ldic[i - j].append((i, j))
+                else:
+                    ldic[i - j] = [(i, j)]
+
+                if j + i - self.height in rdic:
+                    rdic[j + i - self.height].append((i, j))
+                else:
+                    rdic[j + i - self.height] = [(i, j)]
+
+        result = hdic.values()
+        result.extend(vdic.values())
+        result.extend(ldic.values())
+        result.extend(rdic.values())
+        self.ox_list = result
+
+    def count(self, state, ox_list):
+        """
+        Count the 'ox' in a row
+        Return a dict contain all the numbers of x in a row and o's.
+        """
+        result = {'x': [], 'o': []}
+        for ox in result.keys():
+            c = 0
+            head_available = False
+            for i in ox_list:
+                if state.board[i] == ox:
                     c += 1
-                    tmp_i += d[0]
-                    tmp_j += d[1]
-        if breaks == 2 and c < 4:  # and c >= 2:
-            c = 1
-        return c
-
-    directions = (((0, 1), (0, -1)),
-                 ((1, 1), (-1, -1)),
-                 ((1, 0), (-1, 0)),
-                 ((1, -1), (-1, 1)))
-
-    def win(self, ox, state):
-        for k, v in state.board.items():
-            if v == ox:
-                for direction in self.directions:
-                    subcon = self.subcon(ox, k, direction, state)
-                    if subcon >= 4:
-                        return True
-        return False
-
-    # def count(self, state, ox_list):
-    #     result = {'x': [], 'o': []}
-    #     for ox in result.keys():
-    #         c = 0
-    #         for i in ox_list:
-    #             if state.board[i] == ox:
-    #                 c += 1
-    #             elif not state.board[i]:
-    #                 if c > 0:
-    #                     result[ox].append(c)
-    #                 head_cut = False
-    #                 c = 0
-    #             else:
-    #                 if not head_cut or c >= 4:
-    #                     result[ox].append(c)
-    #                 c = 0
-
-    #         if (c > 0 and not head_cut) or c >= 4:
-    #             result[ox].append(c)
-    #     # print result
-    #     return result
-
-    # def get_ox_list(self):
-    #     hdic = {}
-    #     vdic = {}
-    #     ldic = {}
-    #     rdic = {}
-    #     for i in range(self.height):
-    #         for j in range(self.width):
-    #             if i in hdic:
-    #                 hdic[i].append((i, j))
-    #             else:
-    #                 hdic[i] = [(i, j)]
-
-    #             if j in vdic:
-    #                 vdic[j].append((i, j))
-    #             else:
-    #                 vdic[j] = [(i, j)]
-
-    #             if i - j in ldic:
-    #                 ldic[i - j].append((i, j))
-    #             else:
-    #                 ldic[i - j] = [(i, j)]
-
-    #             if j + i - self.height in rdic:
-    #                 rdic[j + i - self.height].append((i, j))
-    #             else:
-    #                 rdic[j + i - self.height] = [(i, j)]
-
-    #     result = hdic.values()
-    #     result.extend(vdic.values())
-    #     result.extend(ldic.values())
-    #     result.extend(rdic.values())
-    #     return result
+                elif state.board[i] is None:
+                    result[ox].append(c)
+                    head_available = True
+                    c = 0
+                else:
+                    if head_available or c >= 4:
+                        result[ox].append(c)
+                    head_available = False
+                    c = 0
+                if head_available or c >= 4:
+                    result[ox].append(c)
+            result[ox].append(c)
+        return result
 
     def eval(self, state):
-        '''
-        count
-        '''
-        # result = {'x': [], 'o': []}
-        # for ox_list in self.get_ox_list():
-        #     counts = self.count(state, ox_list)
-        #     if counts['x'] and max(counts['x']) >= 4:
-        #         return 1
-        #     elif counts['o'] and max(counts['o']) >= 4:
-        #         return -1
-        #     else:
-        #         for ox in result.keys():
-        #             result[ox].extend(counts[ox])
-        # # print result
-        # #
-        # points = {3: 3, 2: 1, 1: 0}
-        # eval_score = {'x': 0, 'o': 0}
-        # for ox, counts in result.items():
-        #     for c in counts:
-        #         eval_score[ox] += points[c]
+        """
+        When there are 4 x in a row, return inf
+        If there are 4 o in a row, return -inf
+        Else return 3 * C3(x) + 1 * C2(x) -  3 * C3(o) + 1 * C2(o)
+        """
+        result = {'x': [], 'o': []}
+        for ox_list in self.ox_list:
+            counts = self.count(state, ox_list)
+            if counts['x'] and max(counts['x']) >= 4:
+                return float('inf')
+            elif counts['o'] and max(counts['o']) >= 4:
+                return -float('inf')
+            else:
+                for ox in result.keys():
+                    result[ox].extend(counts[ox])
+        points = {3: 3, 2: 1, 1: 0, 0: 0}
+        eval_score = {'x': 0, 'o': 0}
+        for ox, counts in result.items():
+            for c in counts:
+                eval_score[ox] += points[c]
+        return eval_score['x'] - eval_score['o']
 
-        # print '================================'
-        # print eval_score['x'] - eval_score['o']
-        # state.display()
-        # print '================================'
-        # return eval_score['x'] - eval_score['o']
-        result = {'x': 0, 'o': 0}
-        # points = {3: 3, 2: 1, 1: 0}
-        for ox in result.keys():
-            for k, v in state.board.items():
-                if v == ox:
-                    for direction in self.directions:
-                        subcon = self.subcon(ox, k, direction, state)
-                        if subcon > result[ox]:
-                            result[ox] = subcon
-                        # if subcon >= 4:
-                        #     return 1 if ox == 'x' else -1
-                        # result[ox] += points[subcon]
-        return result['x'] - result['o']
+    def win(self, state, ox=None):
+        """
+        When there 4 x or 4 o in a row, return True
+        Otherwise return False
+        """
+        for ox_list in self.ox_list:
+            counts = self.count(state, ox_list)
+            if counts['x'] and max(counts['x']) >= 4:
+                if not ox:
+                    return True
+                elif ox == 'x':
+                    return True
+            elif counts['o'] and max(counts['o']) >= 4:
+                if not ox:
+                    return True
+                elif ox == 'o':
+                    return True
+        return False
