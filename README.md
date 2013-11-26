@@ -11,9 +11,9 @@ python aiproject
 
 DESCRIPTION
 -----------
-Models.py contains Class 'Game', 'State'. 
-Views.py is controller of UI, using TKinter.
-ab.py is the alpha beta algorithm.
+'models.py' contains Class 'Game', 'State'. 
+'Views.py' is controller of UI, using TKinter.
+'ab.py' is the alpha beta algorithm.
 
 The cut off function is defined in ab.py.
 It does:
