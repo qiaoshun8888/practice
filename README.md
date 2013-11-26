@@ -3,7 +3,7 @@ AI Project
 
 HOW TO RUN
 ----------
-python __main__.py
+python aiproject (the directory/folder)
 
 
 DESCRIPTION
