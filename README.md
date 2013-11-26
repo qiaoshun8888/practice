@@ -20,12 +20,9 @@ It does:
 The evaluation function is defined in Game Class
 And the utility of State instance get from the evalutaion function
 It does:
-  If there are 4 x in a row:
-    return inf
-  else if there are 4 o in a row:
-    return -inf
-  else:
-    return 3 * C3(x) + 1 * C2(x) -  3 * C3(o) + 1 * C2(o)
+ * If there are 4 x in a row: return inf
+ * else if there are 4 o in a row: return -inf
+ * else: return 3 * C3(x) + 1 * C2(x) -  3 * C3(o) + 1 * C2(o)
 
 
 
