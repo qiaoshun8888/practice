@@ -236,11 +236,3 @@ class Application(Frame):
         self.result_label.place(
             x=self.width * 100 - 150, y=self.height * 100 + 55)
 
-
-def main():
-    # init a application, fall into the mainloop
-    app = Application(width=5, height=4)
-    app.mainloop()
-
-if __name__ == '__main__':
-    main()
