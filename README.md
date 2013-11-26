@@ -7,6 +7,8 @@ run the directory/folder like:
 
 python aiproject 
 
+or run the __ main __ .py in the folder
+
 
 
 DESCRIPTION
