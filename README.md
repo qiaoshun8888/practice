@@ -3,7 +3,8 @@ AI Project
 
 HOW TO RUN
 ----------
-python aiproject (the directory/folder)
+python aiproject 
+ - the directory/folder
 
 
 DESCRIPTION
