@@ -9,6 +9,8 @@ python aiproject
 
 or run the __ main __ .py in the folder
 
+please make sure using python 2.x
+
 
 
 DESCRIPTION
