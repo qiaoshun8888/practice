@@ -38,7 +38,6 @@ def quick_sort(unsorted):
 				partition_inplace(unsorted, right_index+1, end)
 
 	partition_inplace(unsorted, 0, len(unsorted)-1 )
-	print counter
 
 if __name__ == '__main__':
 	unsorted = [9,8,7,6,5,4,3,2,1,0,5,6,7,8]
