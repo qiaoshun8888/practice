@@ -4,8 +4,10 @@ def array2tree(l):
 	for k, v in enumerate(l):
 		l[k] = Node(v)
 	for i in range(len(l)/2):
-		l[i].left = l[i *2+1]
-		l[i].right = l[i*2+2]
+		if 2*i + 1 < len(l):
+			l[i].left = l[i *2+1]
+		if 2*i + 2 < len(l):
+			l[i].right = l[i*2+2]
 	return l[0]
 		
 
