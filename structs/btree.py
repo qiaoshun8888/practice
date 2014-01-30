@@ -1,5 +1,14 @@
 #coding=utf-8
 
+def array2tree(l):
+	for k, v in enumerate(l):
+		l[k] = Node(v)
+	for i in range(len(l)/2):
+		l[i].left = l[i *2+1]
+		l[i].right = l[i*2+2]
+	return l[0]
+		
+
 class Node(object):
 	def __init__(self, data, left=None, right=None):
 		self.data = data
@@ -61,3 +70,6 @@ if __name__ == '__main__':
 		print i,
 	print ""
 
+	print array2tree([10,6,14,4,8,12,6]).data
+	
+	
