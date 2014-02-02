@@ -9,7 +9,7 @@ def array2tree(l):
 		if 2*i + 2 < len(l):
 			l[i].right = l[i*2+2]
 	return l[0]
-		
+
 
 class Node(object):
 	def __init__(self, data, left=None, right=None):
@@ -19,31 +19,31 @@ class Node(object):
 
 
 	def pre_order(self):
+		yield self.data
 		if self.left:
 			for i in self.left.pre_order():
 				yield i
-		yield self.data
 		if self.right:
 			for i in self.right.pre_order():
 				yield i
-	
+
 	def in_order(self):
-		yield self.data
 		if self.left:
 			for i in self.left.in_order():
-				yield i	
+				yield i
+		yield self.data
 		if self.right:
 			for i in self.right.in_order():
 				yield i
 
 	def post_order(self):
+		if self.left:
+			for i in self.left.post_order():
+				yield i
 		if self.right:
 			for i in self.right.post_order():
 				yield i
 		yield self.data
-		if self.left:
-			for i in self.left.post_order():
-				yield i
 
 if __name__ == '__main__':
 	n1 = Node(1)
@@ -73,5 +73,5 @@ if __name__ == '__main__':
 	print ""
 
 	print array2tree([10,6,14,4,8,12,6]).data
-	
-	
+
+
