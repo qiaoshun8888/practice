@@ -1,5 +1,14 @@
 #coding=utf-8
 
+def array2linkedlist(array, need_array=False):
+	for k, v in enumerate(array):
+		array[k] = Node(v)
+		if k > 0:
+			array[k-1].next = array[k]
+	if need_array:
+		return array
+	return array[0]
+
 class Node(object):
 	def __init__(self, data=None, next=None):
 		self.data = data
@@ -24,13 +33,6 @@ class Node(object):
 			n = n.next
 
 if __name__ == '__main__':
-	n1 = Node(1)
-	n2 = Node(2)
-	n3 = Node(3)
-	n4 = Node(4)
-
-	n1.append(n2)
-	n1.insert(n3)
-	n1.append(n4)
-	for n in n1:
-		print n.data
+	n = array2linkedlist([1,2,3,4,5,6,7,8,9])
+	for i in n:
+		print i.data
