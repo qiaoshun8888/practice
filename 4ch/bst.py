@@ -5,7 +5,7 @@ with minimum height
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from structs.btree import Node
+from structs.binary_tree import Node
 
 
 
@@ -29,7 +29,7 @@ def array2bst(array):
 
 def main():
 	root = array2bst([2,4,6,22,1,42,7,8,476,23])
-	
+
 	def bfs(root):
 		res = {}
 		queue = []
@@ -41,14 +41,14 @@ def main():
 				queue.append((node.left, deep+1))
 			if node.right:
 				queue.append((node.right, deep+1))
-	
+
 	bfs(root)
 	print ""
 	for i in root.in_order():
-		print i, 
+		print i,
 	print ""
 	for i in root.pre_order():
-		print i, 
+		print i,
 
 if __name__ == '__main__':
 	main()

@@ -2,7 +2,7 @@
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from structs import btree
+from structs import binary_tree
 
 
 def find_path(rootnode, with_sum):
@@ -35,7 +35,7 @@ def find_path(rootnode, with_sum):
 
 
 def main():
-    rootnode = btree.array2tree([10, 5, 12, 4, 7])
+    rootnode = binary_tree.array2tree([10, 5, 12, 4, 7])
     print find_path(rootnode, 22)
 
 if __name__ == '__main__':

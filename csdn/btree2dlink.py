@@ -3,7 +3,7 @@ convert a binary tree to double linked list
 """
 import os, sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from structs import btree 
+from structs import binary_tree
 
 def convert(root):
 	a, b, c, d = root, root, root, root
@@ -16,11 +16,11 @@ def convert(root):
 		root.right = c
 		c.left = root
 	return a, d
-	 	
+
 
 def main():
-	n = btree.array2tree([10,6,14,4,8,12,16])
-	a,d = convert(n)	
+	n = binary_tree.array2tree([10,6,14,4,8,12,16])
+	a,d = convert(n)
 	tmp = a
 	while tmp:
 		print tmp.data
@@ -28,4 +28,4 @@ def main():
 
 if __name__ == '__main__':
 	main()
-	
+

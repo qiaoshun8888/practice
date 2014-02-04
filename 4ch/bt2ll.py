@@ -2,8 +2,8 @@
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from structs.btree import array2tree
-from structs.btree import Node as TNode
+from structs.binary_tree import array2tree
+from structs.binary_tree import Node as TNode
 from structs.linkedlist import Node as LNode
 
 
@@ -35,9 +35,9 @@ def main():
 	keys = res.keys()
 	keys.sort()
 	for k in keys:
-		print k, 
+		print k,
 		for i in res[k]:
-			print i.data, 
+			print i.data,
 		print ""
 
 

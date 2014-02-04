@@ -1,12 +1,12 @@
 """
-Algorithm to check if btree is bst
+Algorithm to check if binary_tree is bst
 """
 from bst import array2bst
 
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from structs.btree import array2tree
+from structs.binary_tree import array2tree
 
 def is_bst1(node):
 	last = float('-inf')
@@ -35,11 +35,11 @@ def is_bst2(node):
 
 def main():
 	node = array2bst([1,2,3,4,5,6,7,8,9])
-	print is_bst1(node) 
-	print is_bst2(node) 
+	print is_bst1(node)
+	print is_bst2(node)
 	node = array2tree([1,2,3,4,5,6,7,8,9])
-	print is_bst1(node) 
-	print is_bst2(node) 
+	print is_bst1(node)
+	print is_bst2(node)
 
 
 if __name__ == '__main__':

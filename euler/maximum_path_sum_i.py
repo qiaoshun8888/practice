@@ -4,7 +4,7 @@ import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import copy
-from structs import btree
+from structs import binary_tree
 
 
 def maximum_path_sum(t):
@@ -21,7 +21,7 @@ def maximum_path_sum(t):
 
     for i, r in enumerate(t[::-1]):
         for k, v in enumerate(r):
-            r[k] = btree.Node(v)
+            r[k] = binary_tree.Node(v)
             if i > 0:
                 r[k].left = t[-i][k]
                 r[k].right = t[-i][k + 1]

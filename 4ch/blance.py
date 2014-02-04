@@ -1,18 +1,18 @@
 """
-a function to check if a btree is balanced
+a function to check if a binary_tree is balanced
 """
 
 
 import os
 import sys
 sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-from structs.btree import Node
+from structs.binary_tree import Node
 
 
 def is_balance(node):
 	ed = []
 	def dfs(node, deep):
-		if node not in ed:	
+		if node not in ed:
 			ed.append(node)
 			if not node.left and not node.right:
 				yield deep
@@ -27,7 +27,7 @@ def is_balance(node):
 	n = float('inf')
 	for i in dfs(node, 0):
 		if i > m:
-			m = i	
+			m = i
 		if i < n :
 			n = i
 		if m - n >= 2:
@@ -44,7 +44,7 @@ def main():
 	n5 = Node(5)
 	n1.left = n2
 	n1.right = n3
-	n2.left = n4 
+	n2.left = n4
 	n4.left = n5
 	print is_balance(n1)
 
