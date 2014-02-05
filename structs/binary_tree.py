@@ -1,7 +1,7 @@
 # coding=utf-8
 
 
-def array2tree(l, need_array=False):
+def array2tree(l, need_array=False, tree=False):
     for k, v in enumerate(l):
         l[k] = Node(v)
     for i in range(len(l) / 2):
@@ -13,7 +13,18 @@ def array2tree(l, need_array=False):
             l[i * 2 + 2].parent = l[i]
     if need_array:
         return l
+    if tree:
+        return Tree(l[0], len(l))
     return l[0]
+
+
+class Tree(object):
+    root = None
+    length = None  # not every tree has it
+
+    def __init__(self, root, length=None):
+        self.root = root
+        self.length = length
 
 
 class Node(object):
@@ -23,6 +34,17 @@ class Node(object):
         self.left = left
         self.right = right
         self.parent = None
+
+    def __iter__(self):
+        stack = []
+        stack.append(self)
+        while stack:
+            node = stack.pop(0)
+            yield node
+            if node.left:
+                stack.append(node.left)
+            if node.right:
+                stack.append(node.right)
 
     def in_order_next(self):
         # print self.parent, 'in_order_next'

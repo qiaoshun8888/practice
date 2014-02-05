@@ -1,10 +1,17 @@
 # coding=utf-8
 """
-Danger!!!!
+# 2
+2 ways to do it.
+    tuple
+    2 stacks
 """
 
 
 class Stack():
+
+    """
+    will waste space
+    """
     _data = []
     _min = None
 
@@ -25,8 +32,31 @@ class Stack():
         return self._min
 
 
+class Stack2():
+
+    """
+    use anthor stack for min
+    """
+    _data = []
+    _min = []
+
+    def push(self, data):
+        self._data.append(data)
+        if not self._min or self._min[-1] >= data:
+            self._min.append(data)
+
+    def pop(self):
+        tmp = self._data.pop()
+        if tmp == self._min[-1]:
+            self._min.pop()
+        return tmp
+
+    def getmin(self):
+        return self._min[-1]
+
+
 def main():
-    s = Stack()
+    s = Stack2()
     s.push(1)
     s.push(2)
     print s.getmin()
