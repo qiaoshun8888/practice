@@ -1,1 +1,1 @@
-insertion_sort	O(n**2)
+insertion_sort    O(n**2)

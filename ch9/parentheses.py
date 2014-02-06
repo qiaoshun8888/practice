@@ -1,6 +1,44 @@
+def dfs_with_stack(n):
+    stack = []
+    stack.append({'res': '(', 'left': 1, 'right': 0})
+    while stack:
+        node = stack.pop()
+        if node['left'] < n:
+            stack.append({'res': node['res'] + '(',
+                          'left': node['left'] + 1,
+                          'right': node['right']})
+        if node['right'] < n and node['left'] > node['right']:
+            stack.append({'res': node['res'] + ')',
+                          'left': node['left'],
+                          'right': node['right'] + 1})
+        if node['left'] == node['right'] == n:
+            yield node['res']
+
+
+def dfs_recursive(n):
+    def dfs_helper(res, left, right):
+        if left < n:
+            res += '('
+            left += 1
+            for i in dfs_helper(res, left, right):
+                yield i
+            res = res[:-1]
+            left -= 1
+        if right < n and left > right:
+            res += ')'
+            right += 1
+            for i in dfs_helper(res, left, right):
+                yield i
+            res = res[:-1]
+            right -= 1
+        if left == n and right == n:
+            yield res
+    return dfs_helper('', 0, 0)
+
+
 def parentheses(n):
     '''
-    This is wrong, a little bit :(
+    This is wrong, a little bit right :(
     '''
     if n == 1:
         return ['()']
@@ -16,4 +54,9 @@ def parentheses(n):
     return list(res)
 
 if __name__ == '__main__':
-    print parentheses(3)
+    # print parentheses(3)
+    for i in dfs_with_stack(3):
+        print i
+    print ''
+    for i in dfs_recursive(3):
+        print i

@@ -16,51 +16,51 @@ class Book():
 class Reader():
 
     def __init__(self, name):
-    	self.username = name
-    	self.books = []
-    	self.current = None
+        self.username = name
+        self.books = []
+        self.current = None
 
     def read(self, book):
-    	if book in self.books:
-    		self.current = (book, self.books[book])
-    		return book.pages[self.books[book]]
-    	else:
-    		self.books[book] = 0
-    		return self.read(book)
+        if book in self.books:
+            self.current = (book, self.books[book])
+            return book.pages[self.books[book]]
+        else:
+            self.books[book] = 0
+            return self.read(book)
 
     def pagedown(self):
-    	if not current:
-    		raise ValueError
-    	else:
-    		self.books[current[0]] += 1
-    		self.read(current[0])
+        if not current:
+            raise ValueError
+        else:
+            self.books[current[0]] += 1
+            self.read(current[0])
 
     def close(self):
-    	self.current = None
+        self.current = None
 
 
 class System():
-	books = []
-	users = []
+    books = []
+    users = []
 
     def __init__(self):
         pass
 
     def add_book(self, book):
-    	self.books.append(book)
+        self.books.append(book)
 
     def del_book(self, book):
-    	self.books.remove(book)
+        self.books.remove(book)
 
     def add_user(self, user):
-    	self.users.append(user)
+        self.users.append(user)
 
     def del_user(self, user):
-    	self.users.remove(user)
+        self.users.remove(user)
 
     def search(self, keyword):
-    	for i in books:
-    		if keyword in i.name:
-    			yield i
-    		elif keyword in i.author:
-    			yield i
+        for i in books:
+            if keyword in i.name:
+                yield i
+            elif keyword in i.author:
+                yield i
