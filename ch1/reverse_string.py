@@ -1,14 +1,28 @@
-#coding=utf-8
+# coding=utf-8
 
-def reverse(str):
+
+def reverse(A, start, end):
     # for reverse in place
-    str_list = list(str)
-    n = len(str_list)
-    for i in range(n/2):
-        str_list[i], str_list[n-1-i] = str_list[n-1-i], str_list[i]
-    return "".join(str_list)
+    n = end - start
+    for i in range(n / 2):
+        A[start + i], A[end - 1 - i] = A[end - 1 - i], A[start + i]
 
+
+def reverse_word(A):
+    '''
+    for John
+    '''
+    reverse(A, 0, len(A))
+    last_space = 0
+    for i in range(len(A)):
+        if A[i] == ' ':
+            reverse(A, last_space, i)
+            last_space = i + 1
+    reverse(A, last_space, len(A))
 
 if __name__ == '__main__':
-    rever = reverse("test reverse function")
-    print reverse(rever)
+    # python string is imutable. has to convert to list
+    test = "test reverse function"
+    test = list(test)
+    reverse_word(test)
+    print ''.join(test)
