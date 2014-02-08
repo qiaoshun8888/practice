@@ -1,6 +1,8 @@
 #coding=utf-8
 
 def array2linkedlist(array, need_array=False):
+    if not array:
+        return None
     for k, v in enumerate(array):
         array[k] = Node(v)
         if k > 0:

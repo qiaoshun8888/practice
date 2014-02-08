@@ -3,6 +3,11 @@
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
+import os
+import sys
+sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+from structs.linkedlist import Node as ListNode
+from structs.linkedlist import array2linkedlist
 
 
 class Solution:
@@ -14,26 +19,34 @@ class Solution:
             return l2
         if not l2:
             return l1
-
-        head1 = l1
-        head2 = l2
-        p1 = l1
-        p2 = l2
-        tail1 = l1
-        tail2 = l2
-        while p1 and p2:
-            tail1 = p1
-            tail2 = p2
-            if p1.val > p2.val:
-                p1.val, p2.val = p2.val, p1.val
-                tmp1 = p1.next
-                tmp2 = p2.next
-                p1.next = p2
-                p2.next = tmp
-                p1 = tmp1
-                p2 = tmp2
+        head = ListNode(None)
+        runner = head
+        while l1 and l2:
+            if l1.val > l2.val:
+                runner.next = l2
+                l2 = l2.next
             else:
-                p1 = p1.next
-        if p2:
-            tail1.next = p2
-        return head1
+                runner.next = l1
+                l1 = l1.next
+            runner = runner.next
+        if l1:
+            runner.next = l1
+        if l2:
+            runner.next = l2
+        # print head.next.data
+        return head.next
+
+if __name__ == '__main__':
+    l1 = array2linkedlist([3, 5])
+    l2 = array2linkedlist([1, 2, 4])
+    if l1:
+        for i in l1:
+            i.val = i.data
+    if l2:
+        for i in l2:
+            i.val = i.data
+    s = Solution()
+    r = s.mergeTwoLists(l1, l2)
+    if r:
+        for i in r:
+            print i.val
