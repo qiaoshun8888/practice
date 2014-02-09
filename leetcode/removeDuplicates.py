@@ -3,23 +3,31 @@ class Solution:
     # @return an integer
 
     def removeDuplicates(self, A):
-        dup_len = 0
-        k = 0
-        tmp = None
-        a_len = len(A)
-        while k < a_len:
-            if A[k] == tmp:
-                dup_len += 1
+        length = len(A)
+        i = 0
+        duplicated = 0
+        last = None
+        while i < length:
+            if A[i] == last:
+                duplicated += 1
             else:
-                A[k - dup_len:] = A[k:]
-                k -= dup_len
-                tmp = A[k]
-                a_len -= dup_len
-                dup_len = 0
+                # remove
+                if duplicated:
+                    A[i - duplicated:] = A[i:]
+                    i -= duplicated
+                    length -= duplicated
+                duplicated = 0
+            last = A[i]
+            i += 1
+        if duplicated:
+            A[i - duplicated:] = A[i:]
+            length -= duplicated
+        return length
 
-            k += 1
-        return a_len
 
 if __name__ == '__main__':
     s = Solution()
-    print s.removeDuplicates(range(-999, 999))
+    a = [1, 1, 2, 3, 4, 4]
+    print s.removeDuplicates(a)
+    print a
+    # print a

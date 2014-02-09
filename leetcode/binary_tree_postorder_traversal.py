@@ -10,18 +10,16 @@ class Solution:
     # @param root, a tree node
     # @return a list of integers
 
-    def helper(self, root):
-        if root:
-            if root.left:
-                for i in self.helper(root.left):
-                    yield i
-            if root.right:
-                for i in self.helper(root.right):
-                    yield i
-            yield root
-
     def postorderTraversal(self, root):
-        res = []
-        for i in self.helper(root):
-            res.append(i.val)
-        return res
+
+        def helper(root):
+            if root:
+                if root.left:
+                    for i in helper(root.left):
+                        yield i
+                if root.right:
+                    for i in helper(root.right):
+                        yield i
+                yield root
+
+        return [i.val for i in helper(root)]

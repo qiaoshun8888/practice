@@ -5,21 +5,16 @@ class Solution:
         if not height or len(height) < 2:
             return 0
 
-        best = 0
-        left = 0
-        right = len(height) - 1
+        best = float('-inf')
+        left, right = 0, len(height) - 1
 
         while left < right:
-            area = 0
-            width = right - left
             if height[left] > height[right]:
-                area = width * height[right]
+                best = max(best, (right - left) * height[right])
                 right -= 1
             else:
-                area = width * height[left]
+                best = max(best, (right - left) * height[left])
                 left += 1
-            if area > best:
-                best = area
         return best
 
 

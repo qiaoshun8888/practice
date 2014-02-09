@@ -13,15 +13,15 @@ class Solution:
         if not head or not head.next:
             return head
 
-        dic = {head.val: True}
+        # dic = {head.val: True}
+        showed = set([head.val])
         o = head
         n = head.next
         while n:
-            if n.val in dic:
+            if n.val in showed:
                 o.next = n.next
-                n = n.next
             else:
-                dic[n.val] = True
-                n = n.next
+                showed.add(n.val)
                 o = o.next
+            n = n.next
         return head
