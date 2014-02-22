@@ -9,4 +9,12 @@ public class ListNode {
     public ListNode(int val){
         this.val = val;
     }
+    public void printOut(){
+        ListNode n = this;
+        while(n != null){
+            System.out.printf("%d, ", n.val);
+            n = n.next;
+        }
+        System.out.println();
+    }
 }
