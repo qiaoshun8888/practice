@@ -26,7 +26,8 @@ public class ReverseInteger {
         if (neg) return -x;
         return x;
     }
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         int x = 123;
         ReverseInteger s = new ReverseInteger();
         System.out.println(s.reverse(x));

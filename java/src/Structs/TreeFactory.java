@@ -19,14 +19,14 @@ public class TreeFactory {
     public TreeNode array2tree(int[] intArray) {
         if (intArray.length >= 1) {
             ArrayList<TreeNode> al = int2node(intArray);
-            for (int i = intArray.length / 2; i >= 0; i--) {
-                if (2 * i < intArray.length){
-                    al.get(i).left = al.get(2 * i);
-                    al.get(2 * i).parent = al.get(i);
+            for (int i = intArray.length / 2; i > 0; i--) {
+                if (2 * i - 1 < intArray.length) {
+                    al.get(i - 1).left = al.get(2 * i - 1);
+                    al.get(2 * i - 1).parent = al.get(i - 1);
                 }
-                if (2 * i + 1 < intArray.length){
-                    al.get(i).left = al.get(2 * i + 1);
-                    al.get(2 * i + 1).parent = al.get(i);
+                if (2 * i < intArray.length) {
+                    al.get(i - 1).right = al.get(2 * i);
+                    al.get(2 * i).parent = al.get(i - 1);
                 }
             }
             return al.get(0);
@@ -34,19 +34,21 @@ public class TreeFactory {
             return null;
         }
     }
-    public TreeNode bstHelper(int[] intArray, int start, int end){
-        if(end < start) return null;
-        int mid = start + (end - start) /2 ;
+
+    public TreeNode bstHelper(int[] intArray, int start, int end) {
+        if (end < start) return null;
+        int mid = start + (end - start) / 2;
         TreeNode left = bstHelper(intArray, start, mid - 1);
         TreeNode right = bstHelper(intArray, mid + 1, end);
         TreeNode root = new TreeNode(intArray[mid]);
         root.left = left;
         root.right = right;
-        if(left != null) left.parent = root;
-        if(right != null) right.parent = root;
+        if (left != null) left.parent = root;
+        if (right != null) right.parent = root;
         return root;
     }
-    public TreeNode array2bst(int[] intArray){
+
+    public TreeNode array2bst(int[] intArray) {
         Arrays.sort(intArray);
         TreeNode root = bstHelper(intArray, 0, intArray.length - 1);
         return root;

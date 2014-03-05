@@ -12,14 +12,33 @@ import java.util.Queue;
 public class PopulatingNextRightPointersinEachNode {
     public void connect(TreeLinkNode root) {
         if (root == null) return ;
-        HashMap<Integer, TreeLinkNode> nodebyLayer = new HashMap<Integer, TreeLinkNode>();
+        HashMap<Integer, TreeLinkNode> m = new HashMap<Integer, TreeLinkNode>();
         Queue q = new LinkedList();
         q.add(root);
-        while(q.size() > 0){
-            TreeLinkNode node = (TreeLinkNode)q.remove();
-            if(node.left != null) q.add(node.left);
-            if(node.right != null) q.add(node.right);
+        int depth = 0; int currentLevel = 1; int nextLevel = 0;
+        while(!q.isEmpty()){
+            TreeLinkNode node = (TreeLinkNode)q.poll();
+            if(m.containsKey(depth)){
+                m.get(depth).next = node;
+                m.put(depth, node);
+            }else{
+                m.put(depth, node);
+            }
+            if(node.left != null){
+                q.add(node.left);
+                nextLevel ++;
+            }
+            if(node.right != null){
+                q.add(node.right);
+                nextLevel ++;
+            }
+            currentLevel -- ;
+            if(currentLevel == 0){
+                currentLevel = nextLevel;
+                nextLevel = 0;
+                depth ++;
+            }
         }
-
     }
+    
 }

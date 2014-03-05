@@ -52,7 +52,5 @@ public class MinStack {
         System.out.println(m.get_min());
         m.pop();
         System.out.println(m.get_min());
-
-
     }
 }

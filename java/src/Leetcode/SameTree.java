@@ -37,8 +37,9 @@ public class SameTree {
         }
         return stack1.size() == 0 && stack2.size() == 0;
     }
-    public static void main(String[] args){
-        int[] A = {1,2,3,4,5,6,7};
+
+    public static void main(String[] args) {
+        int[] A = {1, 2, 3, 4, 5, 6, 7};
         TreeFactory tf = new TreeFactory();
         TreeNode p = tf.array2tree(A);
         TreeNode q = tf.array2tree(A);
