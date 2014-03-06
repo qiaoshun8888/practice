@@ -3,34 +3,30 @@ package Leetcode;
 import java.util.ArrayList;
 
 /**
- * Created by xin on 2/24/14.
+ * Created by xin on 3/4/14.
  */
 public class GenerateParentheses {
-    public ArrayList<String> generateParenthesis(int n) {
-        ArrayList<String> result = new ArrayList<String>();
-        if (n == 0) return result;
-        if (n == 1) {
-            result.add("()");
-            return result;
-        }
-        // recursively
-        for (String i : generateParenthesis(n - 1)) {
-            for (int j = 0; j < i.length() - 1; j++) {
-                for (int k = j; k < i.length(); k++) {
-                    if (i.charAt(j + 1) == '(') continue;
-                    if (k > 1 && i.charAt(k - 1) == ')') continue;
-                    StringBuilder sb = new StringBuilder();
-                    sb.append(i.substring(0, j));
-                    sb.append('(');
-                    sb.append(i.substring(j, k));
-                    sb.append(')');
-                    if (k <= i.length()) sb.append(i.substring(k, i.length()));
-                    result.add(new String(sb));
-                    System.out.printf("%d, %d, %s, %s\n", j, k, sb, i);
-                }
+    public void helper(int n, int l, int r, StringBuilder sb, ArrayList<String> res) {
+        if (l > n || r > n) return;
+        else if (l == r && l == n) res.add(new String(sb));
+        else if (r > l) return;
+        else if (r == l) {
+            helper(n, l + 1, r, sb.append('('), res);
+            sb.deleteCharAt(sb.length() - 1);
+        } else { //r < l
+            helper(n, l, r + 1, sb.append(')'), res);
+            sb.deleteCharAt(sb.length() - 1);
+            if (l < n) {
+                helper(n, l + 1, r, sb.append('('), res);
+                sb.deleteCharAt(sb.length() - 1);
             }
         }
-        return result;
+    }
+
+    public ArrayList<String> generateParenthesis(int n) {
+        ArrayList<String> res = new ArrayList<String>();
+        helper(n, 0, 0, new StringBuilder(), res);
+        return res;
     }
 
     public static void main(String[] args) {

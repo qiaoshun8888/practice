@@ -15,6 +15,7 @@ class ConnectionThread(Thread):
         try:
             message = connectionSocket.recv(1024)
             filename = message.split()[1]
+            print filename
             with open(filename[1:], 'r') as f:
                 outputdata = f.read()
             # Send one HTTP header line into socket
