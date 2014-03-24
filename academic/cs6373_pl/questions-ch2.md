@@ -39,7 +39,7 @@
     - First widely used language with time sharing
 
 - What language introduced the case statement?
-    - FL/1
+    - ALGOL-W
 
 - What is the primary application area for which Ada was designed?
     - Embedded system applications.
