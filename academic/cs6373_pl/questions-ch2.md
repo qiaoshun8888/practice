@@ -21,7 +21,7 @@
     - MIT by McCarthy
 
 - What language was designed to describe the syntax of ALGOL 60?
-    - Universal language
+    - BNF
 
 - On what language was COBOL based?
     - FLOW-MATIC
