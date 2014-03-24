@@ -45,10 +45,10 @@
     - The **semantic domain** is called the range.
 
 - What is stored in the state of a program for denotational semantics?
-    - ?
+    - The state of a program for denotational semantics is **the value of all its current variables**.
 
 - Which part of an inference rule is the antecedent?
-    - ?
+    - The **top part** of an inference rule is called ••antecedent••.
 
 #### Problem Set
 
