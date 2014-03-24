@@ -36,9 +36,7 @@
     - Non-Science Students
 
 - Why was BASIC an important language in the early 1980s?
-    - First, it’s easy for beginners to learn. 
-    - Second, its smaller dialects can be implemented on computers with very small memories.
-    - (First widely used language with time sharing)
+    - First widely used language with time sharing
 
 - What language introduced the case statement?
     - ALGOL-W
