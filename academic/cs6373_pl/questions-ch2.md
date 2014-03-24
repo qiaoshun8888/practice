@@ -21,7 +21,7 @@
     - MIT by McCarthy
 
 - What language was designed to describe the syntax of ALGOL 60?
-    - Universal language
+    - BNF
 
 - On what language was COBOL based?
     - FLOW-MATIC
@@ -36,10 +36,12 @@
     - Non-Science Students
 
 - Why was BASIC an important language in the early 1980s?
-    - First widely used language with time sharing
+    - First, it’s easy for beginners to learn. 
+    - Second, its smaller dialects can be implemented on computers with very small memories.
+    - (First widely used language with time sharing)
 
 - What language introduced the case statement?
-    - FL/1
+    - ALGOL-W
 
 - What is the primary application area for which Ada was designed?
     - Embedded system applications.
