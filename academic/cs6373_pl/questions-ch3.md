@@ -38,7 +38,11 @@
     - Structural operational semantics
 
 - In denotational semantics, what are the syntactic and semantic domains?
-    - ?
+    - The mapping functions of a denotational semantics programming language specification, like all functions in mathematics, have a domain and a range.
+
+    - The **syntactic domain** is called the domain because it is syntactic structures that are mapped. The domain is the collection of values that are legitimate parameters to the function; the range is the collections of objects to which the parameters are mapped.
+    
+    - The **semantic domain** is called the range.
 
 - What is stored in the state of a program for denotational semantics?
     - ?
