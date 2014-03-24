@@ -9,10 +9,10 @@
     - Scientific
 
 - What was the source of all of the control flow statements of Fortran I?
-    - Three-way selecttion statement (IF)
+    - IBM 704 Instruction
 
 - What was the most significant feature added to Fortran I to get Fortran II?
-    - Independent compilation
+    - Independent compilation of subroutines.
 
 - Which version of Fortran was the first to have character string handling?
     - Fortran 77: Character string handling, Logical loop control statement, IF-THEN-ELSE statement.
