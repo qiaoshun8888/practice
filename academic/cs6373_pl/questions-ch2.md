@@ -42,7 +42,7 @@
     - FL/1
 
 - What is the primary application area for which Ada was designed?
-    - ?
+    - Embedded system applications.
 
 - What are the concurrent program units of Ada called?
     - tasking model
