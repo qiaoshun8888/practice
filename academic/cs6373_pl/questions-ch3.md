@@ -378,7 +378,7 @@ a. abcd
 b. acccbd X
 c. acccbcc X
 d. acd X
-e. accc X
+e. accc 
 ```
 
 - Write a grammar for the language consisting of strings that have n copies of the letter a followed by the same number of copies of the letter b, where n > 0. For example, the strings ab, aaaabbbb, and aaaaaaaabbbbbbbb are in the language but a, abb, ba, and aaabb are not.
