@@ -27,7 +27,7 @@
     - to check for the attribute consistency
 
 - What is the difference between a synthesized and an inherited attribute?
-    - ?
+    - The **synthesized attributes** are the result of the attribute evaluation rules, and may also use the values of the **inherited attributes**. The **inherited attributes** are passed down from parent nodes. In some approaches, **synthesized attributes** are used to pass semantic information up the parse tree, while **inherited attributes** help pass semantic information down it.
 
 - What is the primary use of attribute grammars?
     - Static semantics specification
@@ -38,13 +38,17 @@
     - Structural operational semantics
 
 - In denotational semantics, what are the syntactic and semantic domains?
-    - ?
+    - The mapping functions of a denotational semantics programming language specification, like all functions in mathematics, have a domain and a range.
+
+    - The **syntactic domain** is called the domain because it is syntactic structures that are mapped. The domain is the collection of values that are legitimate parameters to the function; the range is the collections of objects to which the parameters are mapped.
+    
+    - The **semantic domain** is called the range.
 
 - What is stored in the state of a program for denotational semantics?
-    - ?
+    - The state of a program for denotational semantics is **the value of all its current variables**.
 
 - Which part of an inference rule is the antecedent?
-    - ?
+    - The **top part** of an inference rule is called **antecedent**.
 
 #### Problem Set
 
