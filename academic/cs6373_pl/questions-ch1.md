@@ -30,7 +30,7 @@
     - Allow program to intercept run-time errors
 
 - What have been the strongest influences on programming language design over the past 50 years? 
-    - ALGOL
+    - The machine architecture (Von Neumann)
 
 - What is the name of the category of programming languages whose structure is dictated by the von Neumann computer architecture? 
     - Imperative 
