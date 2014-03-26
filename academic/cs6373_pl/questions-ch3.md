@@ -404,6 +404,30 @@ d. C for
 e. C switch
 ```
 
+    **a. Java do-while**
+    do {
+        statements;
+    while (expr);
+    
+    Operational semantic definition:
+    loop:   statements
+            if (expr == true) goto loop
+    out:    ...
+    
+    **d. C for**
+    for (expr1; expr2; expr3) {
+        statements;
+    }
+    
+    Operational semantic definition:
+            expr1;
+    loop:   if (expr2 == 0) goto out
+            statements
+            expr3
+            goto loop
+    out:    ...
+    
+
 - Compute the weakest precondition for each of the following assignment statements and postconditions:
 ```
 a. a = 2 * (b - 1) - 1 {a > 0}
