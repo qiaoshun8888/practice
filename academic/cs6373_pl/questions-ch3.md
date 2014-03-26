@@ -399,10 +399,79 @@ A → a[b]A
 - Using the virtual machine instructions given in Section 3.5.1.1, give an operational semantic definition of the following:
 ```
 a. Java do-while
+    do{
+        ...     
+    }while (expr)
+
+
+    loop:   ...
+            if expr goto loop
+            goto out
+    out:    ...
+```
+```
 b. Ada for
-c. C++ if-then-else
+    For_Loop :                                      
+        for I in Integer range first...last loop    
+            ...                                             
+        end loop For_Loop;                                  
+                                                            
+                                                    
+    I = first
+    loop:   if I > last goto out
+            ...
+            I = I + 1
+            goto loop
+    out:    ...
+```
+```
+c. C++ if-then-else ???
+    if (expr){
+        ...
+    }else{
+        ...
+    }
+
+    check:  if expr goto l1
+            goto l2
+    l1:     ...
+            goto l3
+    l2:     ...
+            goto l3
+```
 d. C for
+    for（expr1;expr2;expr3){
+        ...
+    }
+
+    expr1;
+    loop:   if not expr2 goto out
+            ...
+            expr3
+    out:    ...
+```
 e. C switch
+switch ( expr )
+{
+   case var1 : 
+      ...
+      break; 
+   case var2 : 
+      ...
+      break; 
+   default :
+      ...
+}
+check:  if equal expr var1 goto l1
+        if equal expr var2 goto l2
+        goto default
+l1:     ...
+        goto out
+l2:     ...
+        goto out
+default:...
+        goto out
+out:    ...
 ```
 
 - Compute the weakest precondition for each of the following assignment statements and postconditions:
@@ -414,8 +483,8 @@ d. x = 2 * y + x - 1 {x > 11}
 
     a > 0, b - 1 > 1/2, b > 3/2
     b > 6, c + 10> 18, c > 8
-    a > 1, b = 1/2
-    x > 11, y = 1/2
+    a > 1, b = 1/2 ?
+    x > 11, y = 1/2 ?
 ```
 
 - Compute the weakest precondition for each of the following sequences of assignment statements and their postconditions:
@@ -423,9 +492,16 @@ d. x = 2 * y + x - 1 {x > 11}
 a. a = 2 * b + 1;
    b = a - 3
    {b < 0}
+b<0, a<3, b<1
+pre: b<1
+post: b<0
+```
 b. a = 3 * (2 * b + a);
    b = 2 * a - 1
    {b > 5}
+b>5, a>3, b<-1
+pre: b<-1
+post: b>5
 ```
 
 - Compute the weakest precondition for each of the following selection constructs and their postconditions:
