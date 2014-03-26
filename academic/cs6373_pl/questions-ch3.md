@@ -391,7 +391,7 @@ e. accc
 S → A{bA}
 A → a[b]A
     ????
-    S => A | Ab | AA
+    S => A | AbA
     A => abA | aA
 ```
 
