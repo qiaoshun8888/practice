@@ -427,7 +427,6 @@ e. C switch
             goto loop
     out:    ...
     
-
 - Compute the weakest precondition for each of the following assignment statements and postconditions:
 ```
 a. a = 2 * (b - 1) - 1 {a > 0}
@@ -437,8 +436,8 @@ d. x = 2 * y + x - 1 {x > 11}
 
     a > 0, b - 1 > 1/2, b > 3/2
     b > 6, c + 10> 18, c > 8
-    a > 1, b = 1/2
-    x > 11, y = 1/2
+    a > 1, a + 2 * b - 1 > 1, b > (2 - a) / 2
+    x > 11, 2 * y + x - 1 > 11, y > 6 - x/2
 ```
 
 - Compute the weakest precondition for each of the following sequences of assignment statements and their postconditions:
