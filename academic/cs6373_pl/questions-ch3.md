@@ -438,6 +438,8 @@ d. x = 2 * y + x - 1 {x > 11}
     b > 6, c + 10> 18, c > 8
     a > 1, a + 2 * b - 1 > 1, b > (2 - a) / 2
     x > 11, 2 * y + x - 1 > 11, y > 6 - x/2
+    
+    ** Note that the appearance of the left side of the assignment statement in its right side does not affect the process of computing the weakest precondition. ** (**PDF page 151**)
 ```
 
 - Compute the weakest precondition for each of the following sequences of assignment statements and their postconditions:
@@ -445,9 +447,20 @@ d. x = 2 * y + x - 1 {x > 11}
 a. a = 2 * b + 1;
    b = a - 3
    {b < 0}
+   
+   a - 3 < 0, a < 3
+   2 * b + 1 < 3, b < 1
+   
+   ** The weakest precondition is the least restrictive precondition that will guarantee the validity of the associated postcondition.** (**PDF page 149**)
+   
+   So the weakest precondition is {b < 1}
+   
 b. a = 3 * (2 * b + a);
    b = 2 * a - 1
    {b > 5}
+   
+   2 * a - 1 > 5, a > 3
+   3 * (2 * b + a) > 3, b > (1 - a) / 2 (**This is the final result**)
 ```
 
 - Compute the weakest precondition for each of the following selection constructs and their postconditions:
@@ -457,16 +470,33 @@ a. if (a == b)
    else
       b = 2 * a;
    {b > 1}
+   
+   2 * a + 1 > 1, a > 0
+   2 * a > 1, a > 1 / 2
+   
+   So the weakest precondition is {a > 0}
+   
 b. if (x < y)
       x = x + 1
    else
       x = 3 * x
    {x < 0}
+   
+   x + 1 < 0, x < -1
+   3 * x < 0, x < 0
+   
+   So the weakest precondition is {x < 0}
+   
 c. if (x > y)
       y = 2 * x + 1
    else
       y = 3 * x - 1;
    {y > 3}
+   
+   2 * x + 1 > 3, x > 1
+   3 * x - 1 > 3, x > 4 / 3
+   
+   So the weakest precondition is {x > 1}
 ```
 
 
