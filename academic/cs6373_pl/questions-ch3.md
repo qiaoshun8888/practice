@@ -413,7 +413,8 @@ e. C switch
     loop:   statements
             if (expr == true) goto loop
     out:    ...
-    
+
+ 
     **d. C for**
     for (expr1; expr2; expr3) {
         statements;
@@ -454,7 +455,8 @@ a. a = 2 * b + 1;
    ** The weakest precondition is the least restrictive precondition that will guarantee the validity of the associated postcondition.** (**PDF page 149**)
    
    So the weakest precondition is {b < 1}
-   
+```
+```
 b. a = 3 * (2 * b + a);
    b = 2 * a - 1
    {b > 5}
@@ -475,7 +477,8 @@ a. if (a == b)
    2 * a > 1, a > 1 / 2
    
    So the weakest precondition is {a > 0}
-   
+```
+```   
 b. if (x < y)
       x = x + 1
    else
@@ -486,7 +489,8 @@ b. if (x < y)
    3 * x < 0, x < 0
    
    So the weakest precondition is {x < 0}
-   
+```
+```   
 c. if (x > y)
       y = 2 * x + 1
    else
