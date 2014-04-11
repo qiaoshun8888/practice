@@ -5,7 +5,7 @@ serverSocket = socket(AF_INET, SOCK_STREAM)
 HOST = ''
 PORT = 6789
 serverSocket.bind((HOST, PORT))
-serverSocket.listen(1)
+serverSocket.listen(0)
 while True:
     # Establish the connection
     print 'Ready to serve...'
