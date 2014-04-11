@@ -30,9 +30,8 @@ public class BinaryTreeLevelOrderTraversal {
             }
 
             res.get(res.size() - 1).add(node.val);
-            current--;
-            if (current == 0) {
-                res.add(new ArrayList<Integer>());
+            if (--current == 0) {
+                if (nextLevel > 0) res.add(new ArrayList<Integer>());
                 current = nextLevel;
                 nextLevel = 0;
             }
