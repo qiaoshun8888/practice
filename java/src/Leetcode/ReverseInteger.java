@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 /**
  * Created by xin on 2/17/14.
+ * Bug of overflow!!
  */
 public class ReverseInteger {
     public int reverse(int x) {
