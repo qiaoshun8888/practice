@@ -3,31 +3,25 @@ class Solution:
     # @return an integer
 
     def removeDuplicates(self, A):
-        length = len(A)
-        i = 0
-        duplicated = 0
-        last = None
-        while i < length:
-            if A[i] == last:
-                duplicated += 1
+        if not A:
+            return 0
+        tmp, removed = A[0],  0
+        for k, v in enumerate(A[1:]):
+            if tmp == v:
+                removed += 1
             else:
-                # remove
-                if duplicated:
-                    A[i - duplicated:] = A[i:]
-                    i -= duplicated
-                    length -= duplicated
-                duplicated = 0
-            last = A[i]
-            i += 1
-        if duplicated:
-            A[i - duplicated:] = A[i:]
-            length -= duplicated
-        return length
+                A[k - removed + 1] = A[k + 1]
+            tmp = v
+        return len(A) - removed
 
 
 if __name__ == '__main__':
     s = Solution()
+    a = []
+    print s.removeDuplicates(a), a
+    a = [1, 1, 2]
+    print s.removeDuplicates(a), a
     a = [1, 1, 2, 3, 4, 4]
-    print s.removeDuplicates(a)
-    print a
-    # print a
+    print s.removeDuplicates(a), a
+    a = [1, 1, 1, 1, 1, 1, 1, 1]
+    print s.removeDuplicates(a), a
