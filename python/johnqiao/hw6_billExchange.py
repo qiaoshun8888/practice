@@ -22,10 +22,10 @@ def bill_exchange_recursively(k, bi):
         k -= bills[bi]
         result[0] += 1
         if k == 0:
-            print bills
+            # print bills
             while len(result) < len(bills):
                 result.insert(0, 0)
-            print result
+            # print result
         else:
             bill_exchange_recursively(k, bi)
     else:
@@ -45,7 +45,7 @@ def bill_exchange_iteratively(k):
         else:
             bi -= 1
             result.insert(0, 0)
-    print bills
+    # print bills
     while len(result) < len(bills):
         result.insert(0, 0)
     print result
