@@ -47,7 +47,7 @@
     - Embedded system applications.
 
 - What are the concurrent program units of Ada called?
-    - tasking model
+    - Tasking model
 
 - What three concepts are the basis for object-oriented programming?
     - Classes, objects and methods are the three concepts for OOP programming.

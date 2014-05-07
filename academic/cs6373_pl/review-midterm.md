@@ -35,9 +35,9 @@
 1950      1955      1960      1965      1970      1975      1980      1985      1990      1995      2000      2005
 ------------------------------------------------------------------------------------------------------------------------
                     1960 COBOL & ALGOL 60   1972 C & PROLOG                      
-                          1963 BASIC & PL/1
+          1954 FORTRAN 0    1963 BASIC & PL/1
               1957 FORTRAN I              1971 PASCAL
-                1958 FORTRAIN II & ALGOL 58                       1983 ADA      1990 FORTRAN 90            2003 FORTRAN 03
+                1958 FORTRAIN II & ALGOL 58 & LISP               1983 ADA      1990 FORTRAN 90            2003 FORTRAN 03
                     1960-62 FORTRAN IV                1977 FORTRAN 77
 ```
 

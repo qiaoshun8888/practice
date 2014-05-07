@@ -24,14 +24,13 @@
         - Context-free, but cumbersome
 
 - What purpose do predicates serve in an attribute grammar?
-    - to check for the attribute consistency
+    - To check for the attribute consistency
 
 - What is the difference between a synthesized and an inherited attribute?
     - The **synthesized attributes** are the result of the attribute evaluation rules, and may also use the values of the **inherited attributes**. The **inherited attributes** are passed down from parent nodes. In some approaches, **synthesized attributes** are used to pass semantic information up the parse tree, while **inherited attributes** help pass semantic information down it.
 
 - What is the primary use of attribute grammars?
-    - Static semantics specification
-    - Compiler design (static semantics checking)
+    - Extension to context-free grammar
 
 - Describe the two levels of uses of operational semantics.
     - Natural operational semantics
