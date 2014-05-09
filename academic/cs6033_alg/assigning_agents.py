@@ -19,8 +19,6 @@ def main(agents, tasks, budget):
     agents = sorted(agents)
     assignment = []
 
-    is_budget_sufficient = True
-
     while tasks:
         task = tasks.pop(0)
         while agents:
@@ -30,9 +28,8 @@ def main(agents, tasks, budget):
                 budget -= agent
                 break
         if budget < 0:
-            is_budget_sufficient = False
-            break
-    if len(assignment) == tasks_count and is_budget_sufficient:
+            return False
+    if len(assignment) == tasks_count:
         return assignment
     else:
         return False
